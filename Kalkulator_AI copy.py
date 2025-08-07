@@ -32,18 +32,18 @@ for epoch in range(epochs):
         batch_cal_verify =[]
 
         for rep in range(seria):
-            x1 = random.randint(0, 1000)/skala
-            x2 = random.randint(0, 1000)/skala
+            x1 = random.randint(0, 1000)/1000
+            x2 = random.randint(0,1000)/1000
 
            
 
-            batch_cal.append([x1,x2]) #[32,2]
+            batch_cal.append([[x1,x2]]) #[32,2]
 
-            batch_cal_verify.append([x1+x2]) # [32,1]
+            batch_cal_verify.append([[x1+x2]]) # [32,1]
 
 
         xx = torch.tensor(batch_cal, dtype=torch.float32)
-        valid = torch.tensor(batch_cal, dtype=torch.float32)
+        valid = torch.tensor(batch_cal_verify, dtype=torch.float32)
 
         optimizer.zero_grad()
         output = siec(xx)
@@ -52,14 +52,14 @@ for epoch in range(epochs):
         optimizer.step()
 
         training_loss += loss.item()
-    print(f"Epoch {epoch+1}, Training loss: {training_loss / (ile_batchow * seria):.4f}")
+    print(f"Epoch {epoch+1}, Training loss: {training_loss / (ile_batchow * seria):.10f}")
 
 
 
 for x in range(50):
 
     x1 = random.randint(0, 1000)
-    x2 = random.randint(0, 1000)
+    x2 = random.randint(0,1000)
     
     c1=x1
     c2=x2
